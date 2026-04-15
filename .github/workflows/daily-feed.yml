@@ -5,6 +5,9 @@ on:
     - cron: '0 4 * * *'  # 4 AM UTC = 6 AM EET (winter) / 7 AM EEST (summer)
   workflow_dispatch: {}   # Manual trigger for testing
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
