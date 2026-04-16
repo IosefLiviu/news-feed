@@ -4,14 +4,15 @@ import { fetchTwitter } from './src/fetchers/twitter.js';
 import { fetchReddit } from './src/fetchers/reddit.js';
 import { fetchBlogs } from './src/fetchers/blogs.js';
 import { fetchProductHunt } from './src/fetchers/producthunt.js';
+import { fetchOnePiece } from './src/fetchers/onepiece.js';
 import { curateItems } from './src/curate.js';
 import { buildDashboard } from './src/build.js';
 
 async function main() {
   console.log('[run] Starting daily feed pipeline...');
 
-  // Fetch from all sources in parallel
-  const results = await Promise.allSettled([
+  // News sources (fed through Claude curation)
+  const newsResults = await Promise.allSettled([
     fetchGitHub(),
     fetchYouTube(),
     fetchTwitter(),
@@ -21,31 +22,41 @@ async function main() {
   ]);
 
   const sourceNames = ['GitHub', 'YouTube', 'Twitter', 'Reddit', 'Blogs', 'ProductHunt'];
-  const allItems = [];
+  const allNewsItems = [];
 
-  for (let i = 0; i < results.length; i++) {
-    if (results[i].status === 'fulfilled') {
-      const items = results[i].value;
+  for (let i = 0; i < newsResults.length; i++) {
+    if (newsResults[i].status === 'fulfilled') {
+      const items = newsResults[i].value;
       console.log(`[run] ${sourceNames[i]}: ${items.length} items`);
-      allItems.push(...items);
+      allNewsItems.push(...items);
     } else {
-      console.warn(`[run] ${sourceNames[i]} failed: ${results[i].reason?.message}`);
+      console.warn(`[run] ${sourceNames[i]} failed: ${newsResults[i].reason?.message}`);
     }
   }
 
-  console.log(`[run] Total raw items: ${allItems.length}`);
+  console.log(`[run] Total raw news items: ${allNewsItems.length}`);
 
-  if (allItems.length === 0) {
+  // TCG section (One Piece booster boxes — no Claude curation, price/stock are facts)
+  let tcgItems = [];
+  try {
+    tcgItems = await fetchOnePiece();
+  } catch (err) {
+    console.warn(`[run] OnePiece TCG fetch failed: ${err.message}`);
+  }
+
+  if (allNewsItems.length === 0 && tcgItems.length === 0) {
     console.log('[run] No items collected, preserving existing feed');
     process.exit(0);
   }
 
-  // Curate with Claude
-  const curated = await curateItems(allItems);
-  console.log(`[run] Curated items: ${curated.length}`);
+  // Curate news with Claude
+  const curated = allNewsItems.length
+    ? await curateItems(allNewsItems)
+    : [];
+  console.log(`[run] Curated news items: ${curated.length}`);
 
-  // Build HTML
-  buildDashboard(curated);
+  // Build HTML (news + TCG)
+  buildDashboard(curated, tcgItems);
   console.log('[run] Done!');
 }
 

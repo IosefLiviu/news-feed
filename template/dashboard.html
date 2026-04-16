@@ -398,6 +398,231 @@
       color: var(--text-muted);
       font-weight: 600;
     }
+
+    /* ── Section break (between News and TCG) ── */
+    .section-break {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-mute);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .section-heading h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .section-heading .subtitle {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+    }
+
+    .section-intro {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 8px 0 20px;
+      max-width: 620px;
+      line-height: 1.6;
+    }
+
+    .section-intro a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .section-intro a:hover { text-decoration: underline; }
+
+    /* ── TCG grid ── */
+    #tcg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .tcg-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+      overflow: hidden;
+    }
+
+    .tcg-card:hover {
+      border-color: #484f58;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(0,0,0,.4);
+    }
+
+    .tcg-card.tier-hot {
+      border-color: rgba(247,129,102,.5);
+      background: linear-gradient(135deg, rgba(247,129,102,.08) 0%, var(--surface) 70%);
+    }
+    .tcg-card.tier-deal {
+      border-color: rgba(126,231,135,.35);
+    }
+    .tcg-card.tier-oos {
+      opacity: .55;
+    }
+
+    .tcg-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .tcg-set-code {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(56,139,253,.3);
+      border-radius: 4px;
+      padding: 2px 7px;
+      white-space: nowrap;
+    }
+
+    .tcg-set-code.no-code {
+      color: var(--text-faint);
+      background: transparent;
+      border-color: var(--border-mute);
+    }
+
+    .tcg-tier-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .tcg-tier-badge.hot {
+      color: var(--top);
+      background: rgba(247,129,102,.14);
+      border: 1px solid rgba(247,129,102,.35);
+    }
+
+    .tcg-tier-badge.deal {
+      color: var(--tag-claude);
+      background: rgba(126,231,135,.12);
+      border: 1px solid rgba(126,231,135,.3);
+    }
+
+    .tcg-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .tcg-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .tcg-title a:hover { color: var(--accent); }
+
+    .tcg-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .tcg-price {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .tcg-price .currency {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 2px;
+    }
+
+    .tcg-store {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .tcg-stock-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+    }
+
+    .tcg-stock-pill.in {
+      color: var(--tag-claude);
+      background: rgba(126,231,135,.1);
+      border-color: rgba(126,231,135,.25);
+    }
+
+    .tcg-stock-pill.out {
+      color: var(--text-faint);
+      background: var(--bg);
+      border-color: var(--border-mute);
+    }
+
+    .tcg-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+    }
+
+    /* TCG filter pills use the same .pill styling */
+    .tcg-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    /* Manual-browse link for blocked stores */
+    .manual-browse {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+    }
+    .manual-browse a {
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--text-faint);
+    }
+    .manual-browse a:hover { color: var(--accent); border-color: var(--accent); }
+
+    @media (max-width: 600px) {
+      #tcg-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -454,6 +679,36 @@
     <div class="empty-icon">🔍</div>
     <p>No items match the current filters.<br>Try selecting a different topic or source.</p>
   </div>
+
+  <!-- ═══ TCG section: One Piece Booster Displays ═══ -->
+  <section class="section-break" id="tcg-section">
+    <div class="section-heading">
+      <h2>🏴‍☠️ One Piece TCG — Booster Displays</h2>
+      <span class="subtitle"><span id="tcg-count-badge">{{TCG_COUNT}}</span> in stock</span>
+    </div>
+    <p class="section-intro">
+      24-pack booster displays from Romanian TCG stores. 🔥 marks best deals
+      under 700 RON, 💰 marks good deals under 1,000 RON.
+      Prices and stock refresh daily at 07:15.
+    </p>
+
+    <div class="tcg-filters" id="tcg-filters">
+      <button class="pill active" data-tcg-filter="in-stock">In stock</button>
+      <button class="pill" data-tcg-filter="all">All</button>
+      <button class="pill" data-tcg-filter="deals">Under 1,000 RON</button>
+      <button class="pill" data-tcg-filter="hot">Under 700 RON</button>
+    </div>
+
+    <div id="tcg-grid"></div>
+    <div id="tcg-empty" class="tcg-empty" style="display:none">
+      Nothing matches this filter. Try "All" to see every listing.
+    </div>
+
+    <p class="manual-browse">
+      Also worth a manual check (blocks automated scraping):
+      <a href="https://krit.ro/categorie-produs/one-piece/" target="_blank" rel="noopener">krit.ro</a>
+    </p>
+  </section>
 </div>
 
 <div id="scroll-top" title="Back to top">↑</div>
@@ -469,6 +724,7 @@
 <script>
   // ── Data ──
   const ITEMS = {{DATA}};
+  const TCG_ITEMS = {{TCG_DATA}};
 
   // ── Topic config ──
   const TOPIC_META = {
@@ -660,7 +916,116 @@
       scrollBtn.classList.toggle('visible', window.scrollY > 400);
     }, { passive: true });
     scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // TCG section
+    initTCG();
   })();
+
+  // ═══ TCG render ═══
+  function tcgTier(price) {
+    if (price < 700)  return 'hot';
+    if (price < 1000) return 'deal';
+    return 'std';
+  }
+
+  function fmtRON(n) {
+    // Romanian-style: 1.099,90
+    return n.toFixed(2).replace(/\.(\d+)$/, ',$1').replace(/\B(?=(\d{3})+(?!\d))/, '.');
+  }
+
+  function renderTCGCard(item) {
+    const tier = tcgTier(item.price);
+    const inStock = !!item.inStock;
+    const card = document.createElement('article');
+    const cls = ['tcg-card'];
+    if (!inStock) cls.push('tier-oos');
+    else if (tier === 'hot') cls.push('tier-hot');
+    else if (tier === 'deal') cls.push('tier-deal');
+    card.className = cls.join(' ');
+    card.dataset.instock = inStock ? '1' : '0';
+    card.dataset.tier = tier;
+
+    const setBadge = item.setCode
+      ? `<span class="tcg-set-code">${escHtml(item.setCode)}</span>`
+      : `<span class="tcg-set-code no-code">—</span>`;
+
+    let tierBadge = '';
+    if (inStock && tier === 'hot')  tierBadge = '<span class="tcg-tier-badge hot">🔥 Hot deal</span>';
+    else if (inStock && tier === 'deal') tierBadge = '<span class="tcg-tier-badge deal">💰 Deal</span>';
+
+    const stockPill = inStock
+      ? '<span class="tcg-stock-pill in">● In stock</span>'
+      : '<span class="tcg-stock-pill out">○ Out of stock</span>';
+
+    card.innerHTML = `
+      <div class="tcg-top-row">
+        ${setBadge}
+        ${tierBadge}
+      </div>
+      <div class="tcg-title">
+        <a href="${escHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escHtml(item.title)}</a>
+      </div>
+      <div class="tcg-bottom-row">
+        <div>
+          <div class="tcg-price">${fmtRON(item.price)}<span class="currency">${escHtml(item.currency || 'RON')}</span></div>
+          <div class="tcg-store">${escHtml(item.store)}</div>
+        </div>
+        ${stockPill}
+      </div>
+    `;
+    return card;
+  }
+
+  let tcgFilter = 'in-stock';
+
+  function applyTCGFilter() {
+    const cards = document.querySelectorAll('#tcg-grid .tcg-card');
+    let visible = 0;
+    cards.forEach(c => {
+      const inStock = c.dataset.instock === '1';
+      const tier    = c.dataset.tier;
+      let show = false;
+      if (tcgFilter === 'all')       show = true;
+      else if (tcgFilter === 'in-stock') show = inStock;
+      else if (tcgFilter === 'deals')    show = inStock && (tier === 'deal' || tier === 'hot');
+      else if (tcgFilter === 'hot')      show = inStock && tier === 'hot';
+      c.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    const emptyEl = document.getElementById('tcg-empty');
+    if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  function initTCG() {
+    const grid = document.getElementById('tcg-grid');
+    if (!grid) return;
+
+    if (!TCG_ITEMS || TCG_ITEMS.length === 0) {
+      grid.style.display = 'none';
+      const empty = document.getElementById('tcg-empty');
+      if (empty) {
+        empty.style.display = 'block';
+        empty.textContent = 'No TCG data collected yet. Check back after the next 07:15 run.';
+      }
+      return;
+    }
+
+    const frag = document.createDocumentFragment();
+    TCG_ITEMS.forEach(it => frag.appendChild(renderTCGCard(it)));
+    grid.appendChild(frag);
+
+    document.getElementById('tcg-filters').addEventListener('click', e => {
+      const pill = e.target.closest('.pill');
+      if (!pill) return;
+      tcgFilter = pill.dataset.tcgFilter;
+      document.querySelectorAll('#tcg-filters .pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.tcgFilter === tcgFilter);
+      });
+      applyTCGFilter();
+    });
+
+    applyTCGFilter();
+  }
 </script>
 </body>
 </html>
