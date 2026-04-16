@@ -2,7 +2,10 @@ name: Daily News Feed
 
 on:
   schedule:
-    - cron: '0 4 * * *'  # 4 AM UTC = 6 AM EET (winter) / 7 AM EEST (summer)
+    # 04:15 UTC = 07:15 EEST (summer) / 06:15 EET (winter). Run takes ~10 min,
+    # so the feed is published by ~07:30 local in summer — well before 8 AM.
+    # Off-hour minute (:15) avoids GitHub's round-hour scheduler contention.
+    - cron: '15 4 * * *'
   workflow_dispatch: {}   # Manual trigger for testing
 
 permissions:
