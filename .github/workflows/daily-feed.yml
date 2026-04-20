@@ -1,12 +1,11 @@
 name: Daily News Feed
 
 on:
-  schedule:
-    # 04:15 UTC = 07:15 EEST (summer) / 06:15 EET (winter). Run takes ~10 min,
-    # so the feed is published by ~07:30 local in summer — well before 8 AM.
-    # Off-hour minute (:15) avoids GitHub's round-hour scheduler contention.
-    - cron: '15 4 * * *'
-  workflow_dispatch: {}   # Manual trigger for testing
+  # Schedule disabled 2026-04-20 — was consuming Anthropic API credits daily.
+  # Re-enable by uncommenting the schedule block below.
+  # schedule:
+  #   - cron: '15 4 * * *'
+  workflow_dispatch: {}   # Manual trigger only
 
 permissions:
   contents: write
